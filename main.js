@@ -16,7 +16,7 @@ class ColorCreator {
 	load() {
 		setTimeout(() => {
 			this.#loading.style.display = "none";
-			for (let i = 0; i < 100; i++) {
+			for (let i = 0; i < 200; i++) {
 				this.addColorItem(this.generateRandomColor());
 			}
 			this.#colorForm.style.display = 'block';
