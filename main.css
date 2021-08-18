@@ -1,0 +1,80 @@
+body {
+	font-family: 'Courier New', Courier, monospace;
+	padding: 0 1rem;
+	background-color: #333;
+}
+
+h1 {
+	font-size: 3rem;
+	color: #aaa;
+}
+
+#loading {
+	font-size: 9rem;
+	color: #ccc;
+}
+
+#colors {
+	display: flex;
+	flex-flow: row wrap;
+	padding: 0;
+}
+
+#colors .color {
+	position: relative;
+	list-style: none;
+	border-radius: 5px;
+	line-height: 10rem;
+	text-align: center;
+	font-size: 2rem;
+	font-weight: bold;
+	flex-basis: 25%;
+	margin: 0 20px 20px 0;
+}
+
+#colors .color:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+}
+
+#colors .deleteIcon:hover {
+	font-size: 1.4rem;
+	color: red;
+}
+
+#colors .deleteIcon {
+	position: absolute;
+	top: 125px;
+	right: 0.5rem;
+	width: 1.5rem;
+	height: 1.5rem;
+	padding: 0;
+	font-size: 1rem;
+	line-height: 1.5rem;
+	color: darkred;
+	cursor: pointer;
+}
+
+
+
+#color-form {
+	display: none;
+	margin-bottom: 2rem;
+}
+
+#color-form input {
+	font-size: 2rem;
+	text-align: right;
+	width: 50px;
+	border-radius: 5px;
+}
+
+#color-form button {
+	font-size: 2rem;
+	padding: 0 15px;
+	margin-left: 5px;
+}
