@@ -16,7 +16,7 @@ class ColorCreator {
 	load() {
 		setTimeout(() => {
 			this.#loading.style.display = "none";
-			for (let i = 0; i < 200; i++) {
+			for (let i = 0; i < 100; i++) {
 				this.addColorItem(this.generateRandomColor());
 			}
 			this.#colorForm.style.display = 'block';
@@ -51,7 +51,8 @@ class ColorCreator {
 		newItem.style.backgroundColor = color;
 		newItem.innerHTML = `
 			${color}
-			<span class="deleteIcon"><i class="fa fa-trash" aria-hidden="true"></i></span>
+			<span class="deleteIcon">
+			</i></span>
 		`;
 		this.#colorList.appendChild(newItem);
 	}
