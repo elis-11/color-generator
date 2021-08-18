@@ -1,12 +1,12 @@
 body {
 	font-family: 'Courier New', Courier, monospace;
 	padding: 0 1rem;
-	background-color: #333;
+	background-color: rgb(243, 224, 224);
 }
 
 h1 {
 	font-size: 3rem;
-	color: #aaa;
+	color: #dfc0c3;
 }
 
 #loading {
@@ -26,9 +26,9 @@ h1 {
 	border-radius: 5px;
 	line-height: 10rem;
 	text-align: center;
-	font-size: 2rem;
+	font-size: 1rem;
 	font-weight: bold;
-	flex-basis: 25%;
+	flex-basis: 5%;
 	margin: 0 20px 20px 0;
 }
 
