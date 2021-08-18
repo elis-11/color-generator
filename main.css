@@ -1,13 +1,12 @@
 body {
 	font-family: 'Courier New', Courier, monospace;
 	padding: 0 1rem;
-	background-color: rgb(243, 224, 224);
+	background-color: #333;
 }
 
 h1 {
 	font-size: 3rem;
-	color: #a1888b;
-	/* color: #dfc0c3; */
+	color: #aaa;
 }
 
 #loading {
@@ -15,47 +14,38 @@ h1 {
 	color: #ccc;
 }
 
-#colors {
+#colorList {
 	display: flex;
 	flex-flow: row wrap;
 	padding: 0;
 }
 
-#colors .color {
+#colorList .color {
 	position: relative;
 	list-style: none;
 	border-radius: 5px;
-	line-height: 4em;
+	line-height: 10rem;
 	text-align: center;
-	font-size: 1rem;
+	font-size: 2rem;
 	font-weight: bold;
-	flex-basis: 5%;
+	flex-basis: 25%;
 	margin: 0 20px 20px 0;
 }
 
-#colors .color:before {
-	content: "";
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
-}
-
-#colors .deleteIcon:hover {
-	font-size: .4rem;
+#colorList .deleteIcon:hover {
+	font-size: 1.4rem;
 	color: red;
 }
 
-#colors .deleteIcon {
+#colorList .deleteIcon {
 	position: absolute;
 	top: 125px;
 	right: 0.5rem;
-	width: .5rem;
-	height: .5rem;
+	width: 1.5rem;
+	height: 1.5rem;
 	padding: 0;
 	font-size: 1rem;
-	line-height: .5rem;
+	line-height: 1.5rem;
 	color: darkred;
 	cursor: pointer;
 }
@@ -74,8 +64,37 @@ h1 {
 	border-radius: 5px;
 }
 
-#color-form button {
-	font-size: 2rem;
-	padding: 0 5px;
+#color-form #btn-random {
 	margin-left: 5px;
+}
+
+button {
+	font-size: 2rem;
+	padding: 0 15px;
+}
+
+.secondRow {
+	margin-top: 12px;
+}
+
+.plusMinusButton {
+	border: none;
+}
+
+.buttonRed {
+	background-color: red;
+}
+.buttonGreen {
+	background-color: green;
+}
+.buttonYellow {
+	background-color: yellow;
+}
+
+section.colorButtonArea {
+	display: inline-block;
+}
+
+section.colorButtonArea button {
+	cursor: pointer;
 }

@@ -26,22 +26,59 @@
 
 		<form class="form-inline"
 			  id="color-form">
-			<input type="text"
-				   id="color-amount"
-				   class="form-control"
-				   value="20">
-			<button id="btn-random"
-					class="btn btn-success ml-2">
-				<i class="fa fa-plus"></i> Add colors
-			</button>
-			<button id="btn-random"
-			class="btn btn-success ml-2 secondRow">
-		<i class="fa fa-refresh"></i> Reload
-	</button>
+			<div>
+				<input type="text"
+					   id="color-amount"
+					   class="form-control"
+					   value="5">
+				<button id="btn-random"
+						class="btn ml-2">
+					<i class="fa fa-plus"></i> Add colors
+				</button>
+			</div>
+			<div class="secondRow">
+				<button type="button"
+						id="btn-reload"
+						class="btn">
+					<i class="fa fa-refresh"></i> Reload
+				</button>
 
+				<section class="colorButtonArea">
+					<button type="button"
+							id="btn-redMinus"
+							class="buttonRed plusMinusButton">
+						<i class="fa fa-minus"></i>
+					</button>
+					<button type="button"
+							id="btn-redPlus"
+							class="buttonRed plusMinusButton">
+						<i class="fa fa-plus"></i>
+					</button>
+					<button type="button"
+							id="btn-greenMinus"
+							class="buttonGreen plusMinusButton">
+						<i class="fa fa-minus"></i>
+					</button>
+					<button type="button"
+							id="btn-greenPlus"
+							class="buttonGreen plusMinusButton">
+						<i class="fa fa-plus"></i>
+					</button>
+					<button type="button"
+							id="btn-yellowMinus"
+							class="buttonYellow plusMinusButton">
+						<i class="fa fa-minus"></i>
+					</button>
+					<button type="button"
+							id="btn-yellowPlus"
+							class="buttonYellow plusMinusButton">
+						<i class="fa fa-plus"></i>
+					</button>
+				</section>
+			</div>
 		</form>
 
-		<ul id="colors">
+		<ul id="colorList">
 		</ul>
 
 	</div>

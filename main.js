@@ -5,18 +5,25 @@ class ColorCreator {
 	#colorForm;
 	#loading;
 	#secondsToWaitOnLoading;
+	#reloadButton;
+	#colorButtonArea;
+	#colorChangeIncrement;
 
 	constructor(document) {
 		this.#document = document;
-		this.#colorList = this.#document.getElementById("colors");
+		this.#colorList = this.#document.getElementById("colorList");
 		this.#colorForm = this.#document.getElementById("color-form");
 		this.#loading = this.#document.getElementById("loading");
+		this.#secondsToWaitOnLoading = 1;
+		this.#reloadButton = this.#document.getElementById("btn-reload");
+		this.#colorButtonArea = this.#document.querySelector(".colorButtonArea");
+		this.#colorChangeIncrement = 10;
 	}
 
 	load() {
 		setTimeout(() => {
 			this.#loading.style.display = "none";
-			for (let i = 0; i < 50; i++) {
+			for (let i = 0; i < 10; i++) {
 				this.addColorItem(this.generateRandomColor());
 			}
 			this.#colorForm.style.display = 'block';
@@ -34,7 +41,7 @@ class ColorCreator {
 	getRandomNumber(min, max) {
 		min = Math.ceil(min);
 		max = Math.floor(max);
-		return Math.floor(Math.random() * (max - min + 1)) + min;
+		return Math.floor(Math.random() * (max + 1));
 	}
 
 	generateRandomColor() {
@@ -46,15 +53,24 @@ class ColorCreator {
 	}
 
 	addColorItem(color) {
-		const newItem = this.#document.createElement("li");
+		const newItem = this.#document.createElement("LI");
 		newItem.classList.add("color");
 		newItem.style.backgroundColor = color;
 		newItem.innerHTML = `
 			${color}
-			<span class="deleteIcon">
-			</i></span>
+			<span class="deleteIcon"><i class="fa fa-trash"></i></span>
 		`;
 		this.#colorList.appendChild(newItem);
+	}
+
+	addEventListener_handleColorForm() {
+		this.#colorForm.addEventListener("submit", (e) => {
+			e.preventDefault();
+			const amountOfColors = Number(this.#document.getElementById("color-amount").value);
+			for (let i = 0; i < amountOfColors; i++) {
+				this.addColorItem(this.generateRandomColor());
+			}
+		});
 	}
 
 	addEventListener_removeColorBox() {
@@ -67,21 +83,82 @@ class ColorCreator {
 		});
 	}
 
-	addEventListener_handleColorForm() {
-		this.#colorForm.addEventListener("submit", (e) => {
-			e.preventDefault();
-			const amountOfColors = Number(this.#document.getElementById("color-amount").value);
-			for (let i = 0; i < amountOfColors; i++) {
-				this.addColorItem(
-					this.generateRandomColor()
-				);
-			}
-		});
+	addEventListener_reloadButton() {
+		this.#reloadButton.onclick = () => {
+			Array.from(this.#colorList.children).forEach((colorElem) => {
+				colorElem.style.backgroundColor = this.generateRandomColor();
+			})
+		}
+	}
+
+	getColorDecimalArray(color) {
+		// e.g. "#3fd7c3"
+		const hexColors = {
+			red: color.substring(1,3),
+			green: color.substring(3,5),
+			yellow: color.substring(5,8)
+		}
+		return {
+			red: parseInt(hexColors.red, 16),
+			green: parseInt(hexColors.green, 16),
+			yellow: parseInt(hexColors.yellow, 16)
+		}
+	}
+
+	getColorFromDecimalColors(dc) {
+		return `#${this.decToHex(dc.red)}${this.decToHex(dc.green)}${this.decToHex(dc.yellow)}`;
+	}
+
+	addEventListener_colorButtons() {
+		this.#colorButtonArea.onclick = (e) => {
+			const clickedElem = e.target;
+			const clickedElemId = clickedElem.id === '' ? clickedElem.parentNode.id : clickedElem.id;
+			Array.from(this.#colorList.children).forEach((colorElem, index) => {
+				const color = colorElem.innerText; // e.g. "#3fd7c3"
+				const colorDecimalArray = this.getColorDecimalArray(color);
+				switch (clickedElemId) {
+					case 'btn-redMinus':
+						colorDecimalArray.red -= this.#colorChangeIncrement;
+						colorDecimalArray.red = colorDecimalArray.red < 0 ? 0 : colorDecimalArray.red;
+						break;
+					case 'btn-redPlus':
+						colorDecimalArray.red += this.#colorChangeIncrement;
+						colorDecimalArray.red = colorDecimalArray.red > 255 ? 255 : colorDecimalArray.red;
+						break;
+					case 'btn-greenMinus':
+						colorDecimalArray.green -= this.#colorChangeIncrement;
+						colorDecimalArray.green = colorDecimalArray.green < 0 ? 0 : colorDecimalArray.green;
+						break;
+					case 'btn-greenPlus':
+						colorDecimalArray.green += this.#colorChangeIncrement;
+						colorDecimalArray.green = colorDecimalArray.green > 255 ? 255 : colorDecimalArray.green;
+						break;
+					case 'btn-yellowMinus':
+						colorDecimalArray.yellow -= this.#colorChangeIncrement;
+						colorDecimalArray.yellow = colorDecimalArray.yellow < 0 ? 0 : colorDecimalArray.yellow;
+						break;
+					case 'btn-yellowPlus':
+						colorDecimalArray.yellow += this.#colorChangeIncrement;
+						colorDecimalArray.yellow = colorDecimalArray.yellow > 255 ? 255 : colorDecimalArray.yellow;
+						break;
+					default:
+						console.log('bad entry');
+				}
+				const newColor = this.getColorFromDecimalColors(colorDecimalArray);
+				this.#colorList.children[index].style.backgroundColor = newColor;
+				this.#colorList.children[index].innerHTML = newColor;
+			})
+		}
 	}
 }
 
+// Red- Red+ Green- Green+ Yellow- Yellow+
+// https://hashtagcolor.com/45efc8
+
 const cc = new ColorCreator(document);
-cc.addEventListener_removeColorBox();
 cc.addEventListener_handleColorForm();
-cc.setSecondsToWaitOnLoading(1);
+cc.addEventListener_removeColorBox();
+cc.setSecondsToWaitOnLoading(0);
+cc.addEventListener_reloadButton();
+cc.addEventListener_colorButtons();
 cc.load();
