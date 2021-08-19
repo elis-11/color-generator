@@ -85,7 +85,8 @@ class ColorCreator {
 
 	addEventListener_reloadButton() {
 		this.#reloadButton.onclick = () => {
-			Array.from(this.#colorList.children).forEach((colorElem) => {
+			// Array.from(this.#colorList.children).forEach((colorElem) => {
+			[...this.#colorList.children].forEach((colorElem) => {
 				colorElem.style.backgroundColor = this.generateRandomColor();
 			})
 		}
@@ -96,24 +97,25 @@ class ColorCreator {
 		const hexColors = {
 			red: color.substring(1,3),
 			green: color.substring(3,5),
-			yellow: color.substring(5,8)
+			blue: color.substring(5,7)
 		}
 		return {
 			red: parseInt(hexColors.red, 16),
 			green: parseInt(hexColors.green, 16),
-			yellow: parseInt(hexColors.yellow, 16)
+			blue: parseInt(hexColors.blue, 16)
 		}
 	}
 
 	getColorFromDecimalColors(dc) {
-		return `#${this.decToHex(dc.red)}${this.decToHex(dc.green)}${this.decToHex(dc.yellow)}`;
+		return `#${this.decToHex(dc.red)}${this.decToHex(dc.green)}${this.decToHex(dc.blue)}`;
 	}
 
 	addEventListener_colorButtons() {
 		this.#colorButtonArea.onclick = (e) => {
 			const clickedElem = e.target;
 			const clickedElemId = clickedElem.id === '' ? clickedElem.parentNode.id : clickedElem.id;
-			Array.from(this.#colorList.children).forEach((colorElem, index) => {
+			// Array.from(this.#colorList.children).forEach((colorElem, index) => {
+			[...this.#colorList.children].forEach((colorElem, index) => {
 				const color = colorElem.innerText; // e.g. "#3fd7c3"
 				const colorDecimalArray = this.getColorDecimalArray(color);
 				switch (clickedElemId) {
@@ -133,13 +135,13 @@ class ColorCreator {
 						colorDecimalArray.green += this.#colorChangeIncrement;
 						colorDecimalArray.green = colorDecimalArray.green > 255 ? 255 : colorDecimalArray.green;
 						break;
-					case 'btn-yellowMinus':
-						colorDecimalArray.yellow -= this.#colorChangeIncrement;
-						colorDecimalArray.yellow = colorDecimalArray.yellow < 0 ? 0 : colorDecimalArray.yellow;
+					case 'btn-blueMinus':
+						colorDecimalArray.blue -= this.#colorChangeIncrement;
+						colorDecimalArray.blue = colorDecimalArray.blue < 0 ? 0 : colorDecimalArray.blue;
 						break;
-					case 'btn-yellowPlus':
-						colorDecimalArray.yellow += this.#colorChangeIncrement;
-						colorDecimalArray.yellow = colorDecimalArray.yellow > 255 ? 255 : colorDecimalArray.yellow;
+					case 'btn-bluePlus':
+						colorDecimalArray.blue += this.#colorChangeIncrement;
+						colorDecimalArray.blue = colorDecimalArray.blue > 255 ? 255 : colorDecimalArray.blue;
 						break;
 					default:
 						console.log('bad entry');
@@ -152,7 +154,7 @@ class ColorCreator {
 	}
 }
 
-// Red- Red+ Green- Green+ Yellow- Yellow+
+// Red- Red+ Green- Green+ Blue- Blue+
 // https://hashtagcolor.com/45efc8
 
 const cc = new ColorCreator(document);
